@@ -196,8 +196,8 @@ function createComparisonChart() {
     
     const models = [
         { name: 'LAAT', score: 0.464, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
-        { name: 'CAML', score: 0.452, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
         { name: 'ShifaMind\n(Full)', score: 0.452, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
+        { name: 'CAML', score: 0.452, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
         { name: 'Multi\nResCNN', score: 0.446, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
         { name: 'ShifaMind\n(P1)', score: 0.436, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
         { name: 'PLM-ICD', score: 0.408, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
