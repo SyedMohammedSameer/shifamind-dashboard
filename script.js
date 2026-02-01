@@ -195,14 +195,14 @@ function createComparisonChart() {
     if (!chartContainer) return;
     
     const models = [
-        { name: 'LAAT', score: 0.4644, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
-        { name: 'CAML', score: 0.4524, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
-        { name: 'ShifaMind\n(Full)', score: 0.4522, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
-        { name: 'Multi\nResCNN', score: 0.4458, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
-        { name: 'ShifaMind\n(P1)', score: 0.4360, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
-        { name: 'PLM-ICD', score: 0.4077, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
-        { name: 'GPT-4', score: 0.35, color: 'linear-gradient(180deg, #ffd700, #f59e0b)', highlight: false },
-        { name: 'MSMN', score: 0.3897, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false }
+        { name: 'LAAT', score: 0.464, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
+        { name: 'CAML', score: 0.452, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
+        { name: 'ShifaMind\n(Full)', score: 0.452, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
+        { name: 'Multi\nResCNN', score: 0.446, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
+        { name: 'ShifaMind\n(P1)', score: 0.436, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
+        { name: 'PLM-ICD', score: 0.408, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
+        { name: 'GPT-4', score: 0.350, color: 'linear-gradient(180deg, #ffd700, #f59e0b)', highlight: false },
+        { name: 'MSMN', score: 0.390, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false }
     ];
     
     const maxScore = Math.max(...models.map(m => m.score));
@@ -214,8 +214,8 @@ function createComparisonChart() {
         const labelClass = model.highlight ? 'bar-label our-label' : 'bar-label';
         chartHTML += `
             <div class="chart-bar" style="animation-delay: ${index * 0.08}s">
-                <div class="${barClass}" style="height: ${height}%; background: ${model.color}">
-                    <div class="bar-value">${model.score.toFixed(4)}</div>
+                <div class="${barClass}" style="height: ${height}%; background: ${model.color}; opacity: 1;">
+                    <div class="bar-value">${model.score.toFixed(3)}</div>
                 </div>
                 <div class="${labelClass}">${model.name}</div>
             </div>
@@ -225,20 +225,12 @@ function createComparisonChart() {
     chartContainer.innerHTML = chartHTML;
 }
 
-// Initialize chart when page loads
-window.addEventListener('load', () => {
+// Initialize chart when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', createComparisonChart);
+} else {
     createComparisonChart();
-    
-    // Add animation after chart is created
-    setTimeout(() => {
-        const bars = document.querySelectorAll('.bar');
-        bars.forEach((bar, index) => {
-            setTimeout(() => {
-                bar.style.opacity = '1';
-            }, index * 100);
-        });
-    }, 100);
-});
+}
 
 // Add subtle parallax effect to hero only
 window.addEventListener('scroll', () => {
@@ -280,8 +272,13 @@ function animateValue(element, start, end, duration) {
             clearInterval(timer);
         }
         
-        if (element.classList.contains('stat-number')) {
-            element.textContent = current.toFixed(4);
+        // Format based on element content
+        const text = element.textContent.trim();
+        if (text.includes('%')) {
+            element.textContent = Math.round(current) + '%';
+        } else if (current < 1 && current > 0) {
+            // F1 score - 3 decimal places
+            element.textContent = current.toFixed(3);
         } else {
             element.textContent = Math.round(current);
         }
@@ -294,8 +291,16 @@ const statsObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             const statNumber = entry.target.querySelector('.stat-number');
             if (statNumber && !statNumber.dataset.animated) {
-                const value = parseFloat(statNumber.textContent);
-                statNumber.textContent = '0';
+                const text = statNumber.textContent.trim();
+                let value;
+                
+                if (text.includes('%')) {
+                    value = parseInt(text.replace('%', ''));
+                } else {
+                    value = parseFloat(text);
+                }
+                
+                statNumber.textContent = text.includes('%') ? '0%' : '0';
                 animateValue(statNumber, 0, value, 2000);
                 statNumber.dataset.animated = 'true';
             }
