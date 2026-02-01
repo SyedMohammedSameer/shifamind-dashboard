@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function createComparisonChart() {
     const chartContainer = document.getElementById('mainChart');
     if (!chartContainer) return;
-    
+
     const models = [
         { name: 'LAAT', score: 0.464, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
         { name: 'ShifaMind\n(Full)', score: 0.452, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
@@ -204,24 +204,26 @@ function createComparisonChart() {
         { name: 'GPT-4', score: 0.350, color: 'linear-gradient(180deg, #ffd700, #f59e0b)', highlight: false },
         { name: 'MSMN', score: 0.390, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false }
     ];
-    
+
     const maxScore = Math.max(...models.map(m => m.score));
-    
+    // Use the container height in pixels so percentage heights don't depend on parent sizing
+    const chartHeight = chartContainer.clientHeight || 350;
+
     let chartHTML = '';
     models.forEach((model, index) => {
-        const height = (model.score / maxScore) * 100;
+        const heightPx = Math.round((model.score / maxScore) * chartHeight);
         const barClass = model.highlight ? 'bar highlight-bar' : 'bar';
         const labelClass = model.highlight ? 'bar-label our-label' : 'bar-label';
         chartHTML += `
-            <div class="chart-bar" style="animation-delay: ${index * 0.08}s">
-                <div class="${barClass}" style="height: ${height}%; background: ${model.color}; opacity: 1;">
+            <div class="chart-bar" style="animation-delay: ${index * 0.08}s; height: 100%;">
+                <div class="${barClass}" style="height: ${heightPx}px; background: ${model.color}; opacity: 1;">
                     <div class="bar-value">${model.score.toFixed(3)}</div>
                 </div>
                 <div class="${labelClass}">${model.name}</div>
             </div>
         `;
     });
-    
+
     chartContainer.innerHTML = chartHTML;
 }
 
