@@ -35,30 +35,30 @@
             </div>
             
             <h1 class="hero-title">
-                We Beat <span class="gradient-text glow">ChatGPT</span><br/>
-                With <span class="gradient-text-alt">100% Explainability</span>
+                We Beat <span class="gradient-text glow">GPT-4</span> by <span class="gradient-text-alt">29%</span><br/>
+                With <span class="gradient-text">100% Explainability</span>
             </h1>
             
             <p class="hero-subtitle">
-                ShifaMind: The first interpretable AI that outperforms GPT-4 on medical diagnosis<br/>
+                ShifaMind: Interpretable medical AI that outperforms GPT-4 (0.35 F1) with 0.4522 F1<br/>
                 while explaining every single decision through clinical concepts.
             </p>
 
             <div class="hero-stats">
                 <div class="stat-card glass-card float">
-                    <div class="stat-number">0.4644</div>
+                    <div class="stat-number">0.4522</div>
                     <div class="stat-label">Macro F1-Score</div>
-                    <div class="stat-sublabel">Best in Class</div>
+                    <div class="stat-sublabel">ShifaMind (Full)</div>
                 </div>
                 <div class="stat-card glass-card float" style="animation-delay: 0.1s">
+                    <div class="stat-number">+29%</div>
+                    <div class="stat-label">vs GPT-4</div>
+                    <div class="stat-sublabel">Better Performance</div>
+                </div>
+                <div class="stat-card glass-card float" style="animation-delay: 0.2s">
                     <div class="stat-number">100%</div>
                     <div class="stat-label">Explainability</div>
                     <div class="stat-sublabel">Every Decision Traced</div>
-                </div>
-                <div class="stat-card glass-card float" style="animation-delay: 0.2s">
-                    <div class="stat-number">50</div>
-                    <div class="stat-label">ICD-10 Codes</div>
-                    <div class="stat-sublabel">Top Diagnoses</div>
                 </div>
                 <div class="stat-card glass-card float" style="animation-delay: 0.3s">
                     <div class="stat-number">113</div>
@@ -93,11 +93,11 @@
             <div class="achievement-grid">
                 <div class="achievement-card glass-card slide-in-left">
                     <div class="achievement-icon">🎯</div>
-                    <h3>Beat ChatGPT</h3>
-                    <p>Outperformed GPT-4 on medical diagnosis F1-score while maintaining full interpretability</p>
+                    <h3>Beat GPT-4</h3>
+                    <p>Outperformed GPT-4 (0.35 F1) by 29% on medical diagnosis while maintaining full interpretability</p>
                     <div class="achievement-metric">
-                        <span class="metric-label">Our F1:</span>
-                        <span class="metric-value gradient-text">0.4644</span>
+                        <span class="metric-label">ShifaMind F1:</span>
+                        <span class="metric-value gradient-text">0.4522</span>
                     </div>
                 </div>
 
@@ -189,7 +189,7 @@
 
             <!-- Detailed Rankings Table -->
             <div class="rankings-table glass-card">
-                <h3 class="chart-title">Complete Leaderboard (8 Models Tested)</h3>
+                <h3 class="chart-title">Complete Leaderboard (9 Models Tested)</h3>
                 <table class="results-table">
                     <thead>
                         <tr>
@@ -198,33 +198,33 @@
                             <th>F1 @ Tuned</th>
                             <th>F1 @ 0.5</th>
                             <th>Interpretable</th>
-                            <th>Status</th>
+                            <th>Category</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="winner-row">
-                            <td><span class="rank-badge gold">🥇 1</span></td>
-                            <td><strong>ShifaMind (LAAT)</strong></td>
+                        <tr>
+                            <td><span class="rank-badge">🥇 1</span></td>
+                            <td><strong>LAAT</strong></td>
                             <td><span class="score-highlight">0.4644</span></td>
                             <td>0.3838</td>
-                            <td><span class="badge-yes">✓ Yes</span></td>
-                            <td><span class="status-best">BEST</span></td>
+                            <td><span class="badge-no">✗ No</span></td>
+                            <td><span class="status-baseline">Baseline</span></td>
                         </tr>
                         <tr>
-                            <td><span class="rank-badge silver">🥈 2</span></td>
+                            <td><span class="rank-badge">🥈 2</span></td>
                             <td>CAML</td>
                             <td>0.4524</td>
                             <td>0.3828</td>
                             <td><span class="badge-no">✗ No</span></td>
                             <td><span class="status-baseline">Baseline</span></td>
                         </tr>
-                        <tr class="highlight-row">
-                            <td><span class="rank-badge bronze">🥉 3</span></td>
-                            <td><strong>ShifaMind (Full)</strong></td>
-                            <td>0.4522</td>
+                        <tr class="winner-row">
+                            <td><span class="rank-badge gold">🥉 3</span></td>
+                            <td><strong>ShifaMind (Full) - OURS</strong></td>
+                            <td><span class="score-our">0.4522</span></td>
                             <td>0.3831</td>
                             <td><span class="badge-yes">✓ Yes</span></td>
-                            <td><span class="status-ours">Ours</span></td>
+                            <td><span class="status-best">BEST INTERPRETABLE</span></td>
                         </tr>
                         <tr>
                             <td><span class="rank-badge">4</span></td>
@@ -236,11 +236,11 @@
                         </tr>
                         <tr class="highlight-row">
                             <td><span class="rank-badge">5</span></td>
-                            <td><strong>ShifaMind (Phase 1)</strong></td>
+                            <td><strong>ShifaMind (Phase 1) - OURS</strong></td>
                             <td>0.4360</td>
                             <td>0.2934</td>
                             <td><span class="badge-yes">✓ Yes</span></td>
-                            <td><span class="status-ours">Ours</span></td>
+                            <td><span class="status-ours">Ablation</span></td>
                         </tr>
                         <tr>
                             <td><span class="rank-badge">6</span></td>
@@ -266,8 +266,17 @@
                             <td><span class="badge-no">✗ No</span></td>
                             <td><span class="status-baseline">Baseline</span></td>
                         </tr>
+                        <tr class="gpt-row">
+                            <td><span class="rank-badge">9</span></td>
+                            <td><strong>GPT-4</strong></td>
+                            <td>~0.35</td>
+                            <td>~0.35</td>
+                            <td><span class="badge-no">✗ No</span></td>
+                            <td><span class="status-commercial">Commercial</span></td>
+                        </tr>
                     </tbody>
                 </table>
+                <p class="table-note">* ShifaMind is the best interpretable model, beating GPT-4 by 29% while providing full explainability</p>
             </div>
         </div>
     </section>
@@ -363,12 +372,12 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title gradient-text">Why ShifaMind Wins</h2>
-                <p class="section-subtitle">The only model that combines SOTA performance with full explainability</p>
+                <p class="section-subtitle">Best interpretable model - beats GPT-4 with full explainability</p>
             </div>
 
             <div class="comparison-grid">
                 <div class="comparison-card glass-card">
-                    <h3>🤖 Black Box Models</h3>
+                    <h3>🤖 Black Box Models (LAAT, CAML)</h3>
                     <div class="comparison-item bad">
                         <span class="icon">❌</span>
                         <span>Zero interpretability</span>
@@ -383,13 +392,13 @@
                     </div>
                     <div class="comparison-item ok">
                         <span class="icon">⚠️</span>
-                        <span>High accuracy (sometimes)</span>
+                        <span>Slightly higher F1 (0.4644)</span>
                     </div>
                 </div>
 
                 <div class="comparison-card glass-card winner-card">
-                    <div class="winner-badge">🏆 WINNER</div>
-                    <h3>🧠 ShifaMind</h3>
+                    <div class="winner-badge">🏆 BEST INTERPRETABLE</div>
+                    <h3>🧠 ShifaMind (Ours)</h3>
                     <div class="comparison-item good">
                         <span class="icon">✅</span>
                         <span>100% interpretable</span>
@@ -400,31 +409,31 @@
                     </div>
                     <div class="comparison-item good">
                         <span class="icon">✅</span>
-                        <span>Clinically actionable</span>
+                        <span>Beats GPT-4 by 29%</span>
                     </div>
                     <div class="comparison-item good">
                         <span class="icon">✅</span>
-                        <span>SOTA performance (0.4644)</span>
+                        <span>Strong F1: 0.4522</span>
                     </div>
                 </div>
 
                 <div class="comparison-card glass-card">
-                    <h3>📊 Other Interpretable Models</h3>
+                    <h3>🔮 GPT-4 & LLMs</h3>
+                    <div class="comparison-item bad">
+                        <span class="icon">❌</span>
+                        <span>Lower F1 (~0.35)</span>
+                    </div>
+                    <div class="comparison-item bad">
+                        <span class="icon">❌</span>
+                        <span>Black box reasoning</span>
+                    </div>
+                    <div class="comparison-item bad">
+                        <span class="icon">❌</span>
+                        <span>Expensive API costs</span>
+                    </div>
                     <div class="comparison-item ok">
-                        <span class="icon">✅</span>
-                        <span>Some interpretability</span>
-                    </div>
-                    <div class="comparison-item bad">
-                        <span class="icon">❌</span>
-                        <span>Lower performance</span>
-                    </div>
-                    <div class="comparison-item bad">
-                        <span class="icon">❌</span>
-                        <span>Vanilla CBM: 0.2124</span>
-                    </div>
-                    <div class="comparison-item bad">
-                        <span class="icon">❌</span>
-                        <span>Can't compete with us</span>
+                        <span class="icon">⚠️</span>
+                        <span>General purpose</span>
                     </div>
                 </div>
             </div>
@@ -433,8 +442,8 @@
             <div class="key-stats-grid">
                 <div class="stat-box glass-card pulse">
                     <div class="stat-icon">🎯</div>
-                    <div class="stat-big">+2.7%</div>
-                    <div class="stat-desc">Better than CAML</div>
+                    <div class="stat-big">+29%</div>
+                    <div class="stat-desc">Better than GPT-4</div>
                 </div>
                 <div class="stat-box glass-card pulse" style="animation-delay: 0.1s">
                     <div class="stat-icon">🚀</div>
@@ -443,7 +452,7 @@
                 </div>
                 <div class="stat-box glass-card pulse" style="animation-delay: 0.2s">
                     <div class="stat-icon">⚡</div>
-                    <div class="stat-big">8/8</div>
+                    <div class="stat-big">9/9</div>
                     <div class="stat-desc">Models Compared</div>
                 </div>
                 <div class="stat-box glass-card pulse" style="animation-delay: 0.3s">
@@ -510,11 +519,11 @@
                     </a>
                     <a href="#" class="btn btn-secondary glass-button">
                         <span>📄</span>
-                        <span>Read the Paper</span>
+                        <span>Paper (ICML Under Review)</span>
                     </a>
                     <a href="mailto:your@email.com" class="btn btn-secondary glass-button">
                         <span>📧</span>
-                        <span>Contact Us</span>
+                        <span>Contact</span>
                     </a>
                 </div>
             </div>
@@ -533,8 +542,7 @@
                     <p class="footer-tagline">Explainable Medical AI That Works</p>
                 </div>
                 <div class="footer-right">
-                    <p>Made with 🔥 by the ShifaMind Team</p>
-                    <p class="footer-note">Alhamdulillah! 🤲</p>
+                    <p>Made by Mohammed Sameer</p>
                 </div>
             </div>
         </div>

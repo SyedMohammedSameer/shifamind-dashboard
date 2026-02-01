@@ -195,14 +195,14 @@ function createComparisonChart() {
     if (!chartContainer) return;
     
     const models = [
-        { name: 'ShifaMind\n(LAAT)', score: 0.4644, color: 'linear-gradient(180deg, #00f5ff, #0084ff)', highlight: true },
-        { name: 'CAML', score: 0.4524, color: 'linear-gradient(180deg, #94a3b8, #64748b)' },
+        { name: 'LAAT', score: 0.4644, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
+        { name: 'CAML', score: 0.4524, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
         { name: 'ShifaMind\n(Full)', score: 0.4522, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
-        { name: 'Multi\nResCNN', score: 0.4458, color: 'linear-gradient(180deg, #94a3b8, #64748b)' },
+        { name: 'Multi\nResCNN', score: 0.4458, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
         { name: 'ShifaMind\n(P1)', score: 0.4360, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
-        { name: 'PLM-ICD', score: 0.4077, color: 'linear-gradient(180deg, #94a3b8, #64748b)' },
-        { name: 'MSMN', score: 0.3897, color: 'linear-gradient(180deg, #94a3b8, #64748b)' },
-        { name: 'Longformer', score: 0.3884, color: 'linear-gradient(180deg, #94a3b8, #64748b)' }
+        { name: 'PLM-ICD', score: 0.4077, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
+        { name: 'GPT-4', score: 0.35, color: 'linear-gradient(180deg, #ffd700, #f59e0b)', highlight: false },
+        { name: 'MSMN', score: 0.3897, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false }
     ];
     
     const maxScore = Math.max(...models.map(m => m.score));
@@ -211,12 +211,13 @@ function createComparisonChart() {
     models.forEach((model, index) => {
         const height = (model.score / maxScore) * 100;
         const barClass = model.highlight ? 'bar highlight-bar' : 'bar';
+        const labelClass = model.highlight ? 'bar-label our-label' : 'bar-label';
         chartHTML += `
-            <div class="chart-bar" style="animation-delay: ${index * 0.1}s">
+            <div class="chart-bar" style="animation-delay: ${index * 0.08}s">
                 <div class="${barClass}" style="height: ${height}%; background: ${model.color}">
-                    <div class="bar-value">${model.score}</div>
+                    <div class="bar-value">${model.score.toFixed(4)}</div>
                 </div>
-                <div class="bar-label">${model.name}</div>
+                <div class="${labelClass}">${model.name}</div>
             </div>
         `;
     });
@@ -225,17 +226,30 @@ function createComparisonChart() {
 }
 
 // Initialize chart when page loads
-window.addEventListener('load', createComparisonChart);
+window.addEventListener('load', () => {
+    createComparisonChart();
+    
+    // Add animation after chart is created
+    setTimeout(() => {
+        const bars = document.querySelectorAll('.bar');
+        bars.forEach((bar, index) => {
+            setTimeout(() => {
+                bar.style.opacity = '1';
+            }, index * 100);
+        });
+    }, 100);
+});
 
-// Add parallax effect to sections
+// Add subtle parallax effect to hero only
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.hero-content, .achievement-grid, .architecture-grid');
+    const heroContent = document.querySelector('.hero-content');
     
-    parallaxElements.forEach(el => {
-        const speed = 0.3;
-        el.style.transform = `translateY(${scrolled * speed}px)`;
-    });
+    if (heroContent && scrolled < window.innerHeight) {
+        const speed = 0.15;
+        heroContent.style.transform = `translateY(${scrolled * speed}px)`;
+        heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
+    }
 });
 
 // Add glow effect on hover for cards
