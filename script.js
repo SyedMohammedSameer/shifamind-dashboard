@@ -205,15 +205,24 @@ function createComparisonChart() {
         { name: 'MSMN', score: 0.390, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false }
     ];
 
-    const maxScore = Math.max(...models.map(m => m.score));
-    // Use the container height in pixels so percentage heights don't depend on parent sizing
-    const chartHeight = chartContainer.clientHeight || 350;
+    const scores = models.map(m => m.score);
+    const minScore = Math.min(...scores);
+    const maxScore = Math.max(...scores);
+    const scoreRange = maxScore - minScore || 1e-6; // avoid divide by zero
+
+    // Chart inner usable height (leave a small top padding so labels don't overlap)
+    const chartHeight = Math.max(200, chartContainer.clientHeight || 350);
+    const topPadding = 20; // px so bars don't touch top edge
+    const usableHeight = chartHeight - topPadding;
 
     let chartHTML = '';
     models.forEach((model, index) => {
-        const heightPx = Math.round((model.score / maxScore) * chartHeight);
+        // min-max normalize -> 0..1, then map to usableHeight
+        const normalized = (model.score - minScore) / scoreRange;
+        const heightPx = Math.round(normalized * usableHeight);
         const barClass = model.highlight ? 'bar highlight-bar' : 'bar';
         const labelClass = model.highlight ? 'bar-label our-label' : 'bar-label';
+
         chartHTML += `
             <div class="chart-bar" style="animation-delay: ${index * 0.08}s; height: 100%;">
                 <div class="${barClass}" style="height: ${heightPx}px; background: ${model.color}; opacity: 1;">
