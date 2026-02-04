@@ -513,30 +513,40 @@ section {
 }
 
 .chart {
-    height: 350px;
+    height: 420px; /* controls the visual height of chart area; change as needed */
     display: flex;
     align-items: flex-end;
-    justify-content: space-around;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 1rem;
     padding: 2rem 1rem;
     position: relative;
+    box-sizing: border-box;
 }
 
+/* each column (container for the bar + label) */
 .chart-bar {
-    flex: 1;
+    flex: 0 0 110px; /* fixed-ish width per bar, keeps spacing consistent */
+    max-width: 14%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    position: relative;
 }
 
+/* the colored bar that fills vertically with percent height */
 .bar {
-    width: 100%;
-    background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+    width: 72%;
+    min-height: 24px; /* ensures a visible foot when percent is small */
     border-radius: 8px 8px 0 0;
     position: relative;
-    transition: all 0.3s ease;
-    animation: growBar 1s ease-out;
+    transition: all 0.35s ease;
+    animation: growBar 0.9s ease-out;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: visible;
 }
 
 @keyframes growBar {
@@ -551,20 +561,22 @@ section {
 
 .bar-value {
     position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--font-display);
-    font-size: 0.9rem;
+    top: -26px;
     font-weight: 700;
-    white-space: nowrap;
+    font-family: var(--font-display);
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    font-size: 0.85rem;
 }
 
+/* label below the bar */
 .bar-label {
-    font-size: 0.8rem;
-    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
     color: var(--text-muted);
-    font-weight: 700;
+    text-align: center;
+    line-height: 1.1;
+    white-space: normal;
 }
 
 .our-label {
@@ -1123,6 +1135,22 @@ section {
     section {
         padding: 6rem 0;
     }
+}
+
+@media (max-width: 900px) {
+    .chart {
+        height: 360px;
+        gap: 0.5rem;
+        padding: 1rem 0.5rem;
+    }
+    .chart-bar {
+        flex: 0 0 78px;
+    }
+    .bar {
+        width: 80%;
+    }
+    .bar-value { font-size: 0.75rem; top: -22px; }
+    .bar-label { font-size: 0.75rem; }
 }
 
 @media (max-width: 768px) {
