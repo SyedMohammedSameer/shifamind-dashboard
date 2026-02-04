@@ -190,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Create interactive comparison chart
+// Replace the existing createComparisonChart() implementation with this version
 function createComparisonChart() {
     const chartContainer = document.getElementById('mainChart');
     if (!chartContainer) return;
@@ -208,32 +209,37 @@ function createComparisonChart() {
     const scores = models.map(m => m.score);
     const minScore = Math.min(...scores);
     const maxScore = Math.max(...scores);
-    const scoreRange = maxScore - minScore || 1e-6; // avoid divide by zero
+    const scoreRange = maxScore - minScore || 1e-6;
 
-    // Chart inner usable height (leave a small top padding so labels don't overlap)
-    const chartHeight = Math.max(200, chartContainer.clientHeight || 350);
-    const topPadding = 20; // px so bars don't touch top edge
-    const usableHeight = chartHeight - topPadding;
+    // Build chart using percentages (responsive)
+    chartContainer.innerHTML = '';
 
-    let chartHTML = '';
     models.forEach((model, index) => {
-        // min-max normalize -> 0..1, then map to usableHeight
+        // Normalize to 0..1
         const normalized = (model.score - minScore) / scoreRange;
-        const heightPx = Math.round(normalized * usableHeight);
+        // Map to percentage for the bar element
+        const heightPercent = Math.round(normalized * 100);
+        // Ensure a small minimum so differences remain visible
+        const minVisiblePercent = 8; // tweak if you want taller/better contrast
+        const finalPercent = Math.max(minVisiblePercent, heightPercent);
+
         const barClass = model.highlight ? 'bar highlight-bar' : 'bar';
         const labelClass = model.highlight ? 'bar-label our-label' : 'bar-label';
 
-        chartHTML += `
-            <div class="chart-bar" style="animation-delay: ${index * 0.08}s; height: 100%;">
-                <div class="${barClass}" style="height: ${heightPx}px; background: ${model.color}; opacity: 1;">
+        // Allow linebreaks in names that were encoded as \n
+        const displayName = String(model.name).replace(/\n/g, '<br/>');
+
+        // Append one chart bar (no height:100% on chart-bar)
+        const barHTML = `
+            <div class="chart-bar" style="animation-delay: ${index * 0.08}s;">
+                <div class="${barClass}" style="height: ${finalPercent}%; background: ${model.color};">
                     <div class="bar-value">${model.score.toFixed(3)}</div>
                 </div>
-                <div class="${labelClass}">${model.name}</div>
+                <div class="${labelClass}">${displayName}</div>
             </div>
         `;
+        chartContainer.insertAdjacentHTML('beforeend', barHTML);
     });
-
-    chartContainer.innerHTML = chartHTML;
 }
 
 // Initialize chart when DOM is ready
