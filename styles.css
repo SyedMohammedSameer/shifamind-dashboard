@@ -513,7 +513,7 @@ section {
 }
 
 .chart {
-    height: 720px; /* controls the visual height of chart area; change as needed */
+    height: 420px; /* controls the visual height of chart area; change as needed */
     display: flex;
     align-items: flex-end;
     justify-content: center;
