@@ -515,7 +515,7 @@ section {
 .chart {
     height: 420px; /* controls the visual height of chart area; change as needed */
     display: flex;
-    align-items: flex-end;
+    align-items: stretch;
     justify-content: center;
     gap: 1rem;
     padding: 2rem 1rem;
@@ -527,6 +527,7 @@ section {
 .chart-bar {
     flex: 0 0 110px; /* fixed-ish width per bar, keeps spacing consistent */
     max-width: 14%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
