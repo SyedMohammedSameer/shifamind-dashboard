@@ -1192,7 +1192,7 @@ section {
         width: 100%;
         gap: 0.5rem;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .nav-link {
@@ -1222,7 +1222,6 @@ section {
     }
 
     .achievement-grid,
-    .architecture-grid,
     .comparison-grid {
         grid-template-columns: 1fr;
     }
@@ -1270,14 +1269,63 @@ section {
         padding: 4rem 0;
     }
     
-    .results-table {
-        font-size: 0.85rem;
-        min-width: 700px;
+    .rankings-table {
+        padding: 1rem;
+        overflow-x: visible;
     }
-    
-    .results-table th,
-    .results-table td {
-        padding: 0.75rem 0.5rem;
+
+    .results-table {
+        min-width: 0;
+        width: 100%;
+        font-size: 0.85rem;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .results-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    .results-table tbody tr {
+        display: block;
+        margin-bottom: 0.85rem;
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        overflow: hidden;
+    }
+
+    .results-table tbody td {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 0.6rem 0.75rem;
+        text-align: right;
+    }
+
+    .results-table tbody td:last-child {
+        border-bottom: 0;
+    }
+
+    .results-table tbody td::before {
+        content: attr(data-label);
+        color: var(--text-muted);
+        font-size: 0.72rem;
+        font-family: var(--font-display);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        text-align: left;
+        flex: 0 0 42%;
     }
 
     .cta-content {
@@ -1319,8 +1367,15 @@ section {
         font-size: 0.95rem;
     }
 
-    .results-table {
-        min-width: 640px;
+    .results-table tbody td {
+        gap: 0.7rem;
+        padding: 0.55rem 0.65rem;
+        font-size: 0.8rem;
+    }
+
+    .results-table tbody td::before {
+        flex-basis: 46%;
+        font-size: 0.68rem;
     }
 
     .status-best,

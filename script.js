@@ -180,7 +180,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe all cards and elements
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.glass-card, .stat-card, .achievement-card, .phase-card, .tech-item');
+    const animatedElements = document.querySelectorAll('.glass-card, .stat-card, .achievement-card');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -190,21 +190,34 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Create interactive comparison chart
-// Replace the existing createComparisonChart() implementation with this version
+const allModels = [
+    { name: 'LAAT', score: 0.464, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
+    { name: 'ShifaMind\n(Full)', score: 0.452, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
+    { name: 'CAML', score: 0.452, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
+    { name: 'Multi\nResCNN', score: 0.446, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
+    { name: 'ShifaMind\n(P1)', score: 0.436, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
+    { name: 'PLM-ICD', score: 0.408, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
+    { name: 'GPT-4', score: 0.350, color: 'linear-gradient(180deg, #ffd700, #f59e0b)', highlight: false },
+    { name: 'MSMN', score: 0.390, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false }
+];
+
+function getResponsiveModels() {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        return [
+            allModels[0],
+            allModels[1],
+            allModels[2],
+            allModels[5],
+            allModels[6]
+        ];
+    }
+    return allModels;
+}
+
 function createComparisonChart() {
     const chartContainer = document.getElementById('mainChart');
     if (!chartContainer) return;
-
-    const models = [
-        { name: 'LAAT', score: 0.464, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
-        { name: 'ShifaMind\n(Full)', score: 0.452, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
-        { name: 'CAML', score: 0.452, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
-        { name: 'Multi\nResCNN', score: 0.446, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
-        { name: 'ShifaMind\n(P1)', score: 0.436, color: 'linear-gradient(180deg, #a855f7, #ec4899)', highlight: true },
-        { name: 'PLM-ICD', score: 0.408, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false },
-        { name: 'GPT-4', score: 0.350, color: 'linear-gradient(180deg, #ffd700, #f59e0b)', highlight: false },
-        { name: 'MSMN', score: 0.390, color: 'linear-gradient(180deg, #94a3b8, #64748b)', highlight: false }
-    ];
+    const models = getResponsiveModels();
 
     const scores = models.map(m => m.score);
     const minScore = Math.min(...scores);
@@ -242,12 +255,37 @@ function createComparisonChart() {
     });
 }
 
+function hydrateResultsTableForMobile() {
+    const table = document.querySelector('.results-table');
+    if (!table) return;
+    const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent.trim());
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        row.querySelectorAll('td').forEach((cell, index) => {
+            cell.setAttribute('data-label', headers[index] || '');
+        });
+    });
+}
+
 // Initialize chart when DOM is ready
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', createComparisonChart);
+    document.addEventListener('DOMContentLoaded', () => {
+        createComparisonChart();
+        hydrateResultsTableForMobile();
+    });
 } else {
     createComparisonChart();
+    hydrateResultsTableForMobile();
 }
+
+let chartModeMobile = window.matchMedia('(max-width: 768px)').matches;
+window.addEventListener('resize', () => {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile !== chartModeMobile) {
+        chartModeMobile = isMobile;
+        createComparisonChart();
+    }
+});
 
 // Add subtle parallax effect to hero only
 window.addEventListener('scroll', () => {

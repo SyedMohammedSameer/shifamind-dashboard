@@ -21,7 +21,6 @@
         <div class="nav-links">
             <a href="#hero" class="nav-link active">Overview</a>
             <a href="#results" class="nav-link">Results</a>
-            <a href="#architecture" class="nav-link">Architecture</a>
             <a href="#comparison" class="nav-link">vs Baselines</a>
         </div>
     </nav>
@@ -94,40 +93,40 @@
                 <div class="achievement-card glass-card slide-in-left">
                     <div class="achievement-icon">🎯</div>
                     <h3>Beat GPT-4</h3>
-                    <p>Outperformed GPT-4 (0.350 F1) by 29% on medical diagnosis while maintaining full interpretability</p>
+                    <p>Outperformed leading general-purpose models on internal clinical coding benchmarks.</p>
                     <div class="achievement-metric">
-                        <span class="metric-label">ShifaMind F1:</span>
-                        <span class="metric-value gradient-text">0.452</span>
+                        <span class="metric-label">Performance:</span>
+                        <span class="metric-value gradient-text">Top-tier</span>
                     </div>
                 </div>
 
                 <div class="achievement-card glass-card slide-in-right">
                     <div class="achievement-icon">🔍</div>
                     <h3>Full Explainability</h3>
-                    <p>Every diagnosis is traced through clinical concepts - no black box, just pure interpretability</p>
+                    <p>Predictions are accompanied by transparent concept-level reasoning to support review and trust.</p>
                     <div class="achievement-metric">
-                        <span class="metric-label">Transparency:</span>
-                        <span class="metric-value gradient-text-alt">100%</span>
+                        <span class="metric-label">Traceability:</span>
+                        <span class="metric-value gradient-text-alt">Built-in</span>
                     </div>
                 </div>
 
                 <div class="achievement-card glass-card slide-in-left" style="animation-delay: 0.2s">
                     <div class="achievement-icon">🧠</div>
-                    <h3>Concept Bottleneck</h3>
-                    <p>Novel architecture combining BioClinicalBERT with multiplicative concept gating</p>
+                    <h3>Interpretable by Design</h3>
+                    <p>Designed for human-auditable decisions rather than opaque end-to-end outputs.</p>
                     <div class="achievement-metric">
-                        <span class="metric-label">Innovation:</span>
-                        <span class="metric-value gradient-text">Novel</span>
+                        <span class="metric-label">Approach:</span>
+                        <span class="metric-value gradient-text">Clinician-aware</span>
                     </div>
                 </div>
 
                 <div class="achievement-card glass-card slide-in-right" style="animation-delay: 0.2s">
                     <div class="achievement-icon">📊</div>
-                    <h3>MIMIC-IV Trained</h3>
-                    <p>Trained on 115,103 real clinical cases from the largest open medical dataset</p>
+                    <h3>Clinical Data Grounded</h3>
+                    <p>Developed and validated using real-world clinical documentation workflows.</p>
                     <div class="achievement-metric">
-                        <span class="metric-label">Dataset Size:</span>
-                        <span class="metric-value gradient-text-alt">115K</span>
+                        <span class="metric-label">Coverage:</span>
+                        <span class="metric-value gradient-text-alt">Broad</span>
                     </div>
                 </div>
             </div>
@@ -281,92 +280,6 @@
         </div>
     </section>
 
-    <!-- Architecture Section -->
-    <section id="architecture" class="architecture-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title gradient-text-alt">Revolutionary Architecture</h2>
-                <p class="section-subtitle">Three-phase training with concept bottleneck, GraphSAGE, and RAG</p>
-            </div>
-
-            <div class="architecture-grid">
-                <div class="phase-card glass-card">
-                    <div class="phase-number">Phase 1</div>
-                    <h3 class="phase-title">Concept Bottleneck</h3>
-                    <div class="phase-icon">🔬</div>
-                    <ul class="phase-features">
-                        <li>BioClinicalBERT encoder</li>
-                        <li>113 clinical concepts</li>
-                        <li>Multiplicative gating</li>
-                        <li>F1: 0.436</li>
-                    </ul>
-                    <div class="phase-diagram">
-                        <div class="diagram-box">Text</div>
-                        <div class="diagram-arrow">→</div>
-                        <div class="diagram-box">BERT</div>
-                        <div class="diagram-arrow">→</div>
-                        <div class="diagram-box highlight">Concepts</div>
-                        <div class="diagram-arrow">→</div>
-                        <div class="diagram-box">Diagnosis</div>
-                    </div>
-                </div>
-
-                <div class="phase-card glass-card" style="animation-delay: 0.1s">
-                    <div class="phase-number">Phase 2</div>
-                    <h3 class="phase-title">+ GraphSAGE</h3>
-                    <div class="phase-icon">🕸️</div>
-                    <ul class="phase-features">
-                        <li>Medical knowledge graph</li>
-                        <li>161 nodes (50 dx + 111 concepts)</li>
-                        <li>382 edges</li>
-                        <li>F1: 0.2536</li>
-                    </ul>
-                    <div class="phase-diagram">
-                        <div class="diagram-box">Phase 1</div>
-                        <div class="diagram-arrow">+</div>
-                        <div class="diagram-box highlight">Graph<br/>Encoder</div>
-                        <div class="diagram-arrow">→</div>
-                        <div class="diagram-box">Enhanced</div>
-                    </div>
-                </div>
-
-                <div class="phase-card glass-card winner-card" style="animation-delay: 0.2s">
-                    <div class="phase-number">Phase 3</div>
-                    <h3 class="phase-title">+ RAG</h3>
-                    <div class="phase-icon">📚</div>
-                    <ul class="phase-features">
-                        <li>FAISS retriever</li>
-                        <li>1,050 evidence passages</li>
-                        <li>Clinical knowledge + prototypes</li>
-                        <li><strong>F1: 0.452 🏆</strong></li>
-                    </ul>
-                    <div class="phase-diagram">
-                        <div class="diagram-box">Phase 2</div>
-                        <div class="diagram-arrow">+</div>
-                        <div class="diagram-box highlight">RAG<br/>Evidence</div>
-                        <div class="diagram-arrow">→</div>
-                        <div class="diagram-box winner">SOTA</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="architecture-highlight glass-card">
-                <h3>🌟 Key Innovation: Multiplicative Concept Bottleneck</h3>
-                <div class="innovation-grid">
-                    <div class="innovation-item">
-                        <strong>Vanilla CBM:</strong> z = W × c (Additive)<br/>
-                        <span class="result-bad">F1: 0.212 ❌</span>
-                    </div>
-                    <div class="innovation-arrow">VS</div>
-                    <div class="innovation-item">
-                        <strong>ShifaMind:</strong> z = g(c) ⊙ Ed (Multiplicative)<br/>
-                        <span class="result-good">F1: 0.436 ✅ (+106%)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Comparison Section -->
     <section id="comparison" class="comparison-section">
         <div class="container">
@@ -459,48 +372,6 @@
                     <div class="stat-icon">🔬</div>
                     <div class="stat-big">115K</div>
                     <div class="stat-desc">Training Samples</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tech Stack -->
-    <section class="tech-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title gradient-text-alt">Technology Stack</h2>
-            </div>
-
-            <div class="tech-grid">
-                <div class="tech-item glass-card float">
-                    <div class="tech-icon">🤖</div>
-                    <h4>BioClinicalBERT</h4>
-                    <p>Medical language model</p>
-                </div>
-                <div class="tech-item glass-card float" style="animation-delay: 0.1s">
-                    <div class="tech-icon">🕸️</div>
-                    <h4>GraphSAGE</h4>
-                    <p>Knowledge graph encoder</p>
-                </div>
-                <div class="tech-item glass-card float" style="animation-delay: 0.2s">
-                    <div class="tech-icon">📚</div>
-                    <h4>FAISS</h4>
-                    <p>Vector retrieval</p>
-                </div>
-                <div class="tech-item glass-card float" style="animation-delay: 0.3s">
-                    <div class="tech-icon">🔥</div>
-                    <h4>PyTorch</h4>
-                    <p>Deep learning framework</p>
-                </div>
-                <div class="tech-item glass-card float" style="animation-delay: 0.4s">
-                    <div class="tech-icon">🏥</div>
-                    <h4>MIMIC-IV</h4>
-                    <p>Clinical dataset</p>
-                </div>
-                <div class="tech-item glass-card float" style="animation-delay: 0.5s">
-                    <div class="tech-icon">🎯</div>
-                    <h4>A100 GPU</h4>
-                    <p>Training infrastructure</p>
                 </div>
             </div>
         </div>
