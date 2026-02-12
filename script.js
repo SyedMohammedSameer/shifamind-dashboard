@@ -220,21 +220,16 @@ function createComparisonChart() {
     const models = getResponsiveModels();
 
     const scores = models.map(m => m.score);
-    const minScore = Math.min(...scores);
-    const maxScore = Math.max(...scores);
-    const scoreRange = maxScore - minScore || 1e-6;
+    // Use a zero-based scale to avoid exaggerating small differences.
+    const maxScore = Math.max(...scores, 0.5);
 
     // Build chart using percentages (responsive)
     chartContainer.innerHTML = '';
 
     models.forEach((model, index) => {
-        // Normalize to 0..1
-        const normalized = (model.score - minScore) / scoreRange;
-        // Map to percentage for the bar element
-        const heightPercent = Math.round(normalized * 100);
-        // Ensure a small minimum so differences remain visible
-        const minVisiblePercent = 8; // tweak if you want taller/better contrast
-        const finalPercent = Math.max(minVisiblePercent, heightPercent);
+        const normalized = model.score / maxScore;
+        // Keep some headroom so value labels never clip at the top.
+        const finalPercent = Math.max(20, Math.round(normalized * 88));
 
         const barClass = model.highlight ? 'bar highlight-bar' : 'bar';
         const labelClass = model.highlight ? 'bar-label our-label' : 'bar-label';
